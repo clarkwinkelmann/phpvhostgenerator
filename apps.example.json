@@ -1,0 +1,17 @@
+[{
+	"slug": "proxiedapp",
+	"domains": [
+		"myapp.com"
+	],
+	"https_only": true,
+	"cloudflare_only": true,
+	"proxy_to": "10.10.10.10"
+},{
+	"slug": "otherapp",
+	"domains": [
+		"example.com",
+		"www.example.com"
+	],
+	"docroot": "example.com/public",
+	"directory_directives": ["SetEnv LARAVEL_ENV production"]
+}]
