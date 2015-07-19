@@ -1,4 +1,4 @@
 # PHPVHostGenerator
 
-Small PHP script that generates an Apache VirtalHosts config from a json file.
+Small PHP script that generates Apache VHost config from a json file.
 
