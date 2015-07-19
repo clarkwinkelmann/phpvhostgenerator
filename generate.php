@@ -53,9 +53,9 @@ foreach($apps as $app) {
 		if(array_key_exists('proxy_to', $app)) {
 			// TODO: allow to set https in the property if wanted
 			$proxy_to = 'http://' . array_get($app, 'proxy_to') . '/';
-			echo tabs() . "ProxyPreserveHost On";
-			echo tabs() . "ProxyPass / " . $proxy_to;
-			echo tabs() . "ProxyPassReverse / " . $proxy_to;
+			echo tabs() . "ProxyPreserveHost On\n";
+			echo tabs() . "ProxyPass / " . $proxy_to . "\n";
+			echo tabs() . "ProxyPassReverse / " . $proxy_to . "\n";
 		} else {
 			$docroot = array_get($config, 'docroot', '/') . array_get($app, 'docroot', '');
 
