@@ -50,6 +50,12 @@ foreach($apps as $app) {
 			echo tabs() . "ServerAlias " . $domain . "\n";
 		}
 
+		if(array_get($app, 'https_only', false)) {
+			echo tabs() . "RewriteEngine On\n";
+			echo tabs() . "RewriteCond %{HTTP:X-Forwarded-Proto} !https\n";
+			echo tabs() . "RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L]\n";
+		}
+
 		if(array_key_exists('proxy_to', $app)) {
 			// TODO: allow to set https in the property if wanted
 			$proxy_to = 'http://' . array_get($app, 'proxy_to') . '/';
@@ -60,12 +66,6 @@ foreach($apps as $app) {
 			$docroot = array_get($config, 'docroot', '/') . array_get($app, 'docroot', '');
 
 			echo tabs() . "DocumentRoot \"" . $docroot . "\"\n";
-
-			if(array_get($app, 'https_only', false)) {
-				echo tabs() . "RewriteEngine On\n";
-				echo tabs() . "RewriteCond %{HTTP:X-Forwarded-Proto} !https\n";
-				echo tabs() . "RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L]\n";
-			}
 
 			echo tabs() . "<Directory \"" . $docroot . "\">\n";
 				echo tabs(2) . "Options " . array_get($config, 'directory_options', '') . "\n";
