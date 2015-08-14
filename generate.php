@@ -53,6 +53,9 @@ foreach($apps as $app) {
 		if(array_key_exists('proxy_to', $app)) {
 			// TODO: allow to set https in the property if wanted
 			$proxy_to = 'http://' . array_get($app, 'proxy_to') . '/';
+			// Sets the X_FORWARDED_PROTO header. CloudFlare sets it automatically
+			// but direct https connexions don't have it
+			echo tabs() . "RequestHeader set X_FORWARDED_PROTO 'https'\n";
 			echo tabs() . "ProxyPreserveHost On\n";
 			echo tabs() . "ProxyPass / " . $proxy_to . "\n";
 			echo tabs() . "ProxyPassReverse / " . $proxy_to . "\n";
