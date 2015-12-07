@@ -1,7 +1,9 @@
 {
 	"docroot": "/path/to/www/root/for/local/sites",
 	"appdomain": ".yourappsdomain.io",
-	"directory_options": "Indexes MultiViews #Default options",
+	"directory_options": "Indexes MultiViews",
+	"proxy_error_page_directory": "/var/www/errors",
+	"proxy_error_page_file": "error.html",
 	"cloudflare_ips": [
 		"103.21.244.0/22",
 		"103.22.200.0/22",

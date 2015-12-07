@@ -57,6 +57,20 @@ foreach($apps as $app) {
 		}
 
 		if(array_key_exists('proxy_to', $app)) {
+			if(array_get($config, 'proxy_error_page_directory', '') != '' &&
+					array_get($config, 'proxy_error_page_file', '') != '') {
+				// @see https://www.stefanwienert.de/blog/2012/02/07/apache-proxy-pass-custom-503-error-document/
+				echo tabs() . "DocumentRoot " . array_get($config,
+						'proxy_error_page_directory',
+						'/no_error_page_directory_given') . "\n";
+				echo tabs() . "ProxyPass /" . array_get($config,
+						'proxy_error_page_file',
+						'no_error_page_file_given.html') . " !\n";
+				echo tabs() . "ErrorDocument 500 /" . array_get($config,
+						'proxy_error_page_file',
+						'no_error_page_file_given.html') . "\n";
+			}
+
 			// TODO: allow to set https in the property if wanted
 			$proxy_to = 'http://' . array_get($app, 'proxy_to') . '/';
 			echo tabs() . "ProxyPreserveHost On\n";
